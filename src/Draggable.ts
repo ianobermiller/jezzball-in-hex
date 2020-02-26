@@ -6,6 +6,7 @@ import {
   Physics,
   Mouse,
   Vector,
+  useEnableDisable
 } from "@hex-engine/2d";
 
 export default function Draggable(geometry: ReturnType<typeof Geometry>) {
@@ -14,12 +15,17 @@ export default function Draggable(geometry: ReturnType<typeof Geometry>) {
   const physics = useEntity().getComponent(Physics.Body);
 
   const mouse = useNewComponent(Mouse);
+  const enableDisable = useEnableDisable();
 
   let originalStatic = false;
   let isDragging = false;
   const startedDraggingAt = new Vector(0, 0);
 
-  mouse.onDown((event) => {
+  mouse.onDown(event => {
+    if (!enableDisable.isEnabled) {
+      return;
+    }
+
     if (physics) {
       originalStatic = physics.body.isStatic;
       physics.setStatic(true);
@@ -28,7 +34,7 @@ export default function Draggable(geometry: ReturnType<typeof Geometry>) {
     startedDraggingAt.mutateInto(event.pos);
   });
 
-  mouse.onMove((event) => {
+  mouse.onMove(event => {
     if (isDragging) {
       geometry.position.addMutate(event.pos.subtract(startedDraggingAt));
     }
