@@ -6,8 +6,7 @@ import {
   Physics,
   Mouse,
   Vector,
-  useEnableDisable,
-  Keyboard
+  useEnableDisable
 } from "@hex-engine/2d";
 
 export default function Draggable(geometry: ReturnType<typeof Geometry>) {
@@ -16,7 +15,6 @@ export default function Draggable(geometry: ReturnType<typeof Geometry>) {
   const physics = useEntity().getComponent(Physics.Body);
 
   const mouse = useNewComponent(Mouse);
-  const keyboard = useNewComponent(Keyboard);
   const enableDisable = useEnableDisable();
 
   let originalStatic = false;
@@ -25,10 +23,6 @@ export default function Draggable(geometry: ReturnType<typeof Geometry>) {
 
   mouse.onDown(event => {
     if (!enableDisable.isEnabled) {
-      return;
-    }
-
-    if (!keyboard.pressed.has("Shift")) {
       return;
     }
 
