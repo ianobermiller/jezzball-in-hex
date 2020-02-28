@@ -11,6 +11,7 @@ import Floor from './Floor';
 import Box from './Box';
 import Button from './Button';
 import Ball from './Ball';
+import Triangle from './Triangle';
 
 export default function Root() {
   useType(Root);
@@ -28,12 +29,11 @@ export default function Root() {
   useChild(() => Floor(canvasCenter.addY(200)));
   useChild(() => Box(canvasCenter));
   const useChildAsMyRoot = useCallbackAsCurrent(useChild);
+  const childrenTypes = [Ball, Box, Triangle];
   function newBox() {
-    if (Math.random() > 0.5) {
-      useChildAsMyRoot(() => Ball(canvasCenter));
-    } else {
-      useChildAsMyRoot(() => Box(canvasCenter));
-    }
+    const childType =
+      childrenTypes[Math.floor(Math.random() * childrenTypes.length)];
+    useChildAsMyRoot(() => childType(canvasCenter));
   }
 
   useChild(() => Button(new Vector(0, 0), newBox));
