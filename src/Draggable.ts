@@ -7,6 +7,8 @@ import {
   Mouse,
   Vector,
   useEnableDisable,
+  Keyboard,
+  useDestroy,
 } from '@hex-engine/2d';
 
 export default function Draggable(geometry: ReturnType<typeof Geometry>) {
@@ -14,8 +16,10 @@ export default function Draggable(geometry: ReturnType<typeof Geometry>) {
 
   const physics = useEntity().getComponent(Physics.Body);
 
+  const keyboard = useNewComponent(Keyboard);
   const mouse = useNewComponent(Mouse);
   const enableDisable = useEnableDisable();
+  const {destroy} = useDestroy();
 
   let originalStatic = false;
   let isDragging = false;
@@ -23,6 +27,11 @@ export default function Draggable(geometry: ReturnType<typeof Geometry>) {
 
   mouse.onDown(event => {
     if (!enableDisable.isEnabled) {
+      return;
+    }
+
+    if (keyboard.pressed.has('Shift')) {
+      destroy();
       return;
     }
 
