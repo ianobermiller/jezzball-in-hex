@@ -24,10 +24,14 @@ export default function Button(position: Vector) {
     Label({ font, text: `${position.x}x${position.y}` })
   );
 
+  const size = label.size.add(padding.multiply(2));
+
   const geometry = useNewComponent(() =>
     Geometry({
-      shape: Polygon.rectangle(label.size.add(padding.multiply(2))),
-      position: position.clone()
+      shape: Polygon.rectangle(size),
+      // Add half the size to the position so that instead of being centered, the
+      // position specifies top-left
+      position: position.add(size.divide(2))
     })
   );
 
