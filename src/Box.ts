@@ -6,8 +6,8 @@ import {
   Vector,
   Physics,
   useDraw,
-} from "@hex-engine/2d";
-import Draggable from "./Draggable";
+} from '@hex-engine/2d';
+import Draggable from './Draggable';
 
 export default function Box(position: Vector) {
   useType(Box);
@@ -23,7 +23,7 @@ export default function Box(position: Vector) {
   useNewComponent(() => Draggable(geometry));
 
   useDraw(context => {
-    context.fillStyle = "red";
-    geometry.shape.draw(context, "fill");
+    context.fillStyle = 'red';
+    geometry.shape.draw(context, 'fill');
   });
 }

@@ -10,8 +10,8 @@ import {
   Label,
   Circle,
   Mouse,
-} from "@hex-engine/2d";
-import AudioContextComponent from "@hex-engine/2d/src/Components/AudioContext";
+} from '@hex-engine/2d';
+import AudioContextComponent from '@hex-engine/2d/src/Components/AudioContext';
 
 const padding = new Vector(8, 4);
 
@@ -19,10 +19,10 @@ export default function Button(position: Vector, onClick: () => void) {
   useType(Button);
 
   const font = useNewComponent(() =>
-    SystemFont({ name: "sans-serif", size: 14 }),
+    SystemFont({name: 'sans-serif', size: 14}),
   );
   const label = useNewComponent(() =>
-    Label({ font, text: `${position.x}x${position.y}` }),
+    Label({font, text: `${position.x}x${position.y}`}),
   );
 
   const size = label.size.add(padding.multiply(2));
@@ -36,18 +36,18 @@ export default function Button(position: Vector, onClick: () => void) {
     }),
   );
 
-  useNewComponent(() => Physics.Body(geometry, { isStatic: true }));
+  useNewComponent(() => Physics.Body(geometry, {isStatic: true}));
 
   const mouse = useNewComponent(Mouse);
   mouse.onClick(onClick);
 
   useDraw(context => {
-    context.fillStyle = "#ddd";
-    geometry.shape.draw(context, "fill");
+    context.fillStyle = '#ddd';
+    geometry.shape.draw(context, 'fill');
 
-    context.fillStyle = "red";
+    context.fillStyle = 'red';
     const radius = 1;
-    new Circle(radius * 2).draw(context, "fill", { x: -radius, y: -radius });
+    new Circle(radius * 2).draw(context, 'fill', {x: -radius, y: -radius});
 
     label.draw(context, padding);
   });

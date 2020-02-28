@@ -6,7 +6,7 @@ import {
   Vector,
   Physics,
   useDraw,
-} from "@hex-engine/2d";
+} from '@hex-engine/2d';
 
 export default function Floor(position: Vector) {
   useType(Floor);
@@ -18,10 +18,10 @@ export default function Floor(position: Vector) {
     }),
   );
 
-  useNewComponent(() => Physics.Body(geometry, { isStatic: true }));
+  useNewComponent(() => Physics.Body(geometry, {isStatic: true}));
 
   useDraw(context => {
-    context.fillStyle = "#ddd";
-    geometry.shape.draw(context, "fill");
+    context.fillStyle = '#ddd';
+    geometry.shape.draw(context, 'fill');
   });
 }
