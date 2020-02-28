@@ -19,7 +19,7 @@ export default function Ball(position: Vector) {
     }),
   );
 
-  useNewComponent(() => Physics.Body(geometry));
+  useNewComponent(() => Physics.Body(geometry, {restitution: 0.8}));
   useNewComponent(() => Draggable(geometry));
 
   useDraw(context => {
