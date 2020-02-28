@@ -9,6 +9,7 @@ import {
   useEnableDisable,
   Keyboard,
   useDestroy,
+  useUpdate,
 } from '@hex-engine/2d';
 
 export default function Draggable(geometry: ReturnType<typeof Geometry>) {
@@ -54,5 +55,11 @@ export default function Draggable(geometry: ReturnType<typeof Geometry>) {
       physics.setStatic(originalStatic);
     }
     isDragging = false;
+  });
+
+  useUpdate(() => {
+    if (geometry.position.y < 0 || geometry.position.y > 1000) {
+      destroy();
+    }
   });
 }
