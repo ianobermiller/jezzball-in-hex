@@ -6,7 +6,7 @@ import {
   Physics,
   Mouse,
   Vector,
-  useEnableDisable
+  useEnableDisable,
 } from "@hex-engine/2d";
 
 export default function Draggable(geometry: ReturnType<typeof Geometry>) {

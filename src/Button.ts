@@ -8,20 +8,21 @@ import {
   useDraw,
   SystemFont,
   Label,
-  Circle
+  Circle,
+  Mouse,
 } from "@hex-engine/2d";
 import AudioContextComponent from "@hex-engine/2d/src/Components/AudioContext";
 
 const padding = new Vector(8, 4);
 
-export default function Button(position: Vector) {
+export default function Button(position: Vector, onClick: () => void) {
   useType(Button);
 
   const font = useNewComponent(() =>
-    SystemFont({ name: "sans-serif", size: 14 })
+    SystemFont({ name: "sans-serif", size: 14 }),
   );
   const label = useNewComponent(() =>
-    Label({ font, text: `${position.x}x${position.y}` })
+    Label({ font, text: `${position.x}x${position.y}` }),
   );
 
   const size = label.size.add(padding.multiply(2));
@@ -31,11 +32,14 @@ export default function Button(position: Vector) {
       shape: Polygon.rectangle(size),
       // Add half the size to the position so that instead of being centered, the
       // position specifies top-left
-      position: position.add(size.divide(2))
-    })
+      position: position.add(size.divide(2)),
+    }),
   );
 
   useNewComponent(() => Physics.Body(geometry, { isStatic: true }));
+
+  const mouse = useNewComponent(Mouse);
+  mouse.onClick(onClick);
 
   useDraw(context => {
     context.fillStyle = "#ddd";

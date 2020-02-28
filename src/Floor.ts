@@ -13,14 +13,14 @@ export default function Floor(position: Vector) {
 
   const geometry = useNewComponent(() =>
     Geometry({
-      shape: Polygon.rectangle(new Vector(200, 25)),
+      shape: Polygon.rectangle(new Vector(800, 25)),
       position: position.clone(),
-    })
+    }),
   );
 
   useNewComponent(() => Physics.Body(geometry, { isStatic: true }));
 
-  useDraw((context) => {
+  useDraw(context => {
     context.fillStyle = "#ddd";
     geometry.shape.draw(context, "fill");
   });

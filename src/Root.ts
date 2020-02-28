@@ -4,7 +4,8 @@ import {
   useChild,
   Canvas,
   Physics,
-  Vector
+  Vector,
+  useCallbackAsCurrent,
 } from "@hex-engine/2d";
 import Floor from "./Floor";
 import Box from "./Box";
@@ -20,13 +21,18 @@ export default function Root() {
 
   const canvasCenter = new Vector(
     canvas.element.width / 2,
-    canvas.element.height / 2
+    canvas.element.height / 2,
   );
 
-  useChild(() => Floor(canvasCenter.addY(100)));
+  useChild(() => Floor(canvasCenter.addY(200)));
   useChild(() => Box(canvasCenter));
-  useChild(() => Button(new Vector(0, 0)));
-  useChild(() => Button(new Vector(100, 100)));
-  useChild(() => Button(new Vector(200, 100)));
-  useChild(() => Button(new Vector(100, 200)));
+  const useChildAsMyRoot = useCallbackAsCurrent(useChild);
+  function newBox() {
+    useChildAsMyRoot(() => Box(canvasCenter));
+  }
+
+  useChild(() => Button(new Vector(0, 0), newBox));
+  useChild(() => Button(new Vector(100, 100), newBox));
+  useChild(() => Button(new Vector(200, 100), newBox));
+  useChild(() => Button(new Vector(100, 200), newBox));
 }

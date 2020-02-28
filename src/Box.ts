@@ -16,13 +16,13 @@ export default function Box(position: Vector) {
     Geometry({
       shape: Polygon.rectangle(new Vector(25, 25)),
       position: position.clone(),
-    })
+    }),
   );
 
   useNewComponent(() => Physics.Body(geometry));
   useNewComponent(() => Draggable(geometry));
 
-  useDraw((context) => {
+  useDraw(context => {
     context.fillStyle = "red";
     geometry.shape.draw(context, "fill");
   });
