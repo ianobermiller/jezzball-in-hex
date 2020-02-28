@@ -10,6 +10,7 @@ import {
 import Floor from './Floor';
 import Box from './Box';
 import Button from './Button';
+import Ball from './Ball';
 
 export default function Root() {
   useType(Root);
@@ -28,7 +29,8 @@ export default function Root() {
   useChild(() => Box(canvasCenter));
   const useChildAsMyRoot = useCallbackAsCurrent(useChild);
   function newBox() {
-    useChildAsMyRoot(() => Box(canvasCenter));
+    if (Math.random() > 0.5) useChildAsMyRoot(() => Ball(canvasCenter));
+    else useChildAsMyRoot(() => Box(canvasCenter));
   }
 
   useChild(() => Button(new Vector(0, 0), newBox));
