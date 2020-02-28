@@ -21,9 +21,7 @@ export default function Button(position: Vector, onClick: () => void) {
   const font = useNewComponent(() =>
     SystemFont({name: 'sans-serif', size: 14}),
   );
-  const label = useNewComponent(() =>
-    Label({font, text: `${position.x}x${position.y}`}),
-  );
+  const label = useNewComponent(() => Label({font, text: 'Add Random Shape'}));
 
   const size = label.size.add(padding.multiply(2));
 
@@ -44,11 +42,6 @@ export default function Button(position: Vector, onClick: () => void) {
   useDraw(context => {
     context.fillStyle = '#ddd';
     geometry.shape.draw(context, 'fill');
-
-    context.fillStyle = 'red';
-    const radius = 1;
-    new Circle(radius * 2).draw(context, 'fill', {x: -radius, y: -radius});
-
     label.draw(context, padding);
   });
 }

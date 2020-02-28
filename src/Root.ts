@@ -29,12 +29,12 @@ export default function Root() {
   useChild(() => Box(canvasCenter));
   const useChildAsMyRoot = useCallbackAsCurrent(useChild);
   function newBox() {
-    if (Math.random() > 0.5) useChildAsMyRoot(() => Ball(canvasCenter));
-    else useChildAsMyRoot(() => Box(canvasCenter));
+    if (Math.random() > 0.5) {
+      useChildAsMyRoot(() => Ball(canvasCenter));
+    } else {
+      useChildAsMyRoot(() => Box(canvasCenter));
+    }
   }
 
   useChild(() => Button(new Vector(0, 0), newBox));
-  useChild(() => Button(new Vector(100, 100), newBox));
-  useChild(() => Button(new Vector(200, 100), newBox));
-  useChild(() => Button(new Vector(100, 200), newBox));
 }
