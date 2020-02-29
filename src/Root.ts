@@ -19,15 +19,20 @@ export default function Root() {
   const canvas = useNewComponent(() => Canvas({backgroundColor: 'white'}));
   canvas.fullscreen({pixelZoom: 2});
 
-  useNewComponent(Physics.Engine);
+  const physics = useNewComponent(() =>
+    Physics.Engine({gravity: new Vector(0, 0)}),
+  );
 
   const canvasCenter = new Vector(
     canvas.element.width / 2,
     canvas.element.height / 2,
   );
 
-  useChild(() => Floor(canvasCenter.addY(200)));
-  useChild(() => Box(canvasCenter));
+  useChild(() => Floor(new Vector(800, 25), canvasCenter.addY(200)));
+  useChild(() => Floor(new Vector(800, 25), canvasCenter.subtractY(200)));
+  useChild(() => Floor(new Vector(25, 800), canvasCenter.addX(400)));
+  useChild(() => Floor(new Vector(25, 800), canvasCenter.subtractX(400)));
+
   const useChildAsMyRoot = useCallbackAsCurrent(useChild);
   const childrenTypes = [Ball, Box, Triangle];
   function newBox() {

@@ -8,12 +8,12 @@ import {
   useDraw,
 } from '@hex-engine/2d';
 
-export default function Floor(position: Vector) {
+export default function Floor(size: Vector, position: Vector) {
   useType(Floor);
 
   const geometry = useNewComponent(() =>
     Geometry({
-      shape: Polygon.rectangle(new Vector(800, 25)),
+      shape: Polygon.rectangle(size),
       position: position.clone(),
     }),
   );

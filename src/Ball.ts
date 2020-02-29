@@ -19,14 +19,8 @@ export default function Ball(position: Vector) {
     }),
   );
 
-  useNewComponent(() =>
-    Physics.Body(geometry, {
-      restitution: 1,
-      friction: 0,
-      frictionAir: 0,
-      frictionStatic: 0,
-    }),
-  );
+  useNewComponent(() => Physics.Body(geometry));
+
   useNewComponent(() => Draggable(geometry));
 
   useDraw(context => {
