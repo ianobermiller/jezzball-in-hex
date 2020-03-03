@@ -34,7 +34,7 @@ export default function Root() {
   useChild(() => Floor(new Vector(25, 800), canvasCenter.subtractX(400)));
 
   const useChildAsMyRoot = useCallbackAsCurrent(useChild);
-  const childrenTypes = [Ball, Box, Triangle];
+  const childrenTypes = [Ball]; //, Box, Triangle];
   function newBox() {
     const childType =
       childrenTypes[Math.floor(Math.random() * childrenTypes.length)];
