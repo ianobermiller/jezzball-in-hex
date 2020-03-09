@@ -41,5 +41,7 @@ export default function Root() {
     useChildAsMyRoot(() => childType(canvasCenter));
   }
 
+  for (let i = 0; i < 50; i++) newBox();
+
   useChild(() => Button(new Vector(0, 0), newBox));
 }
